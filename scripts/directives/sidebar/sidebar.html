@@ -1,0 +1,171 @@
+<div class="navbar-default sidebar" role="navigation">
+	<div class="sidebar-nav navbar-collapse in">
+		<ul class="nav in" id="side-menu">
+			<li>
+				<img src="./images/Golf_Media_Operations_Logo_Color.png" alt="NBCGolf" style=" display: block;">
+			</li>
+			<li class="">
+				<a ui-sref="{{myDashboard}}" data-toggle="{{meCollapse}}" data-target=".navbar-collapse">
+					<i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+			</li>
+			<li class="" ng-show="meSeeRests">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-refresh fa-fw"></i> Restores
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li>
+						<a ui-sref="dashboard.viewRestoreRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li class="" ng-show="meSeeDubs">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-copy fa-fw"></i> Duplications
+					<span class="fa arrow"></span>
+				</a>
+				<ul aria-expanded="false" class="nav nav-second-level">
+					<li ng-show="meEditDubs">
+						<a ui-sref="dashboard.createDubRequest" data-toggle={{meCollapse}} data-target=".navbar-collapse">Create Request(s)</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.viewDubRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li class="" ng-show="meSeeIngs">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-hdd-o fa-fw"></i> Ingests
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li ng-show="meEditIngs">
+						<a ui-sref="dashboard.createIngestRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">Create Request(s)</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.viewIngestRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li class="" ng-show="meSeeArcs">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-eject fa-fw"></i> Archive
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li ng-show="meEditArcs">
+						<a ui-sref="dashboard.createArchiveRequest" data-toggle={{meCollapse}} data-target=".navbar-collapse">Create Request(s)</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.viewArchiveRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li class="" ng-show="true">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-cc fa-fw"></i> Captioning
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li ng-show="true">
+						<a ui-sref="dashboard.createCaptionRequest" data-toggle={{meCollapse}} data-target=".navbar-collapse">Create Request(s)</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.viewCaptionRequests" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li class="">
+				<a href="mailto:MediaOperations@GolfChannel.com?Subject=Blank%20Stock%20Request&Body=This%20feature%20is%20currently%20in%20development.%20For%20now%20please%20email%20Media%20Operations%20for%20blank%20stock%20requets"
+				 target="_top" aria-expanded="false">
+					<i class="fa fa-shopping-cart fa-fw"></i> Stock
+					<span class="fa arrow"></span>
+				</a>
+			</li>
+			<li class="" ng-hide="true">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-shopping-cart fa-fw"></i> Stock
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li>
+						<a ui-sref="dashboard.underConstruction" data-toggle={{meCollapse}} data-target=".navbar-collapse">Blank Stock Request(s)</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.underConstruction" data-toggle={{meCollapse}} data-target=".navbar-collapse">View All</a>
+					</li>
+					<li ng-show="meAdmin">
+						<a ui-sref="dashboard.addBlankStock" data-toggle={{meCollapse}} data-target=".navbar-collapse">Add Blank Stock</a>
+					</li>
+					<li ng-show="meAdmin">
+						<a ui-sref="dashboard.stockInventoryLevels" data-toggle={{meCollapse}} data-target=".navbar-collapse">Stock Inventory Levels</a>
+					</li>
+				</ul>
+			</li>
+			<li class="">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-graduation-cap fa-fw"></i> Tutorials
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li>
+						<a ui-sref="dashboard.cheatSheets" data-toggle={{meCollapse}} data-target=".navbar-collapse">Documents</a>
+					</li>
+					<li>
+						<a ui-sref="dashboard.instructionalVideos" data-toggle={{meCollapse}} data-target=".navbar-collapse">Instructional Videos</a>
+					</li>
+				</ul>
+			</li>
+			<li class="" ng-hide="true">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-sort-alpha-asc fa-fw"></i> Media Research
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li>
+						<a href="#" aria-expanded="false">Research Request(s)
+							<span class="fa arrow"></span>
+						</a>
+						<ul class="nav nav-third-level" aria-expanded="false">
+							<li>
+								<a ui-sref="dashboard.underConstruction" data-toggle={{meCollapse}} data-target=".navbar-collapse">Create Request</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a ui-sref="dashboard.underConstruction" data-toggle={{meCollapse}} data-target=".navbar-collapse">Research Documents</a>
+					</li>
+			</li>
+			</ul>
+			</li>
+			<li class="" ng-show="meAdmin">
+				<a href="#" aria-expanded="false">
+					<i class="fa fa-university fa-fw"></i> Administration
+					<span class="fa arrow"></span>
+				</a>
+				<ul class="nav nav-second-level" aria-expanded="false">
+					<li>
+						<a ui-sref="dashboard.manageUsers" data-toggle={{meCollapse}} data-target=".navbar-collapse">Manage Users</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a ui-sref="dashboard.importantDocs" data-toggle={{meCollapse}} data-target=".navbar-collapse">
+					<i class="fa fa-medkit fa-fw"></i> Important Docs</a>
+			</li>
+			<li>
+				<a ui-sref="dashboard.contact" data-toggle={{meCollapse}} data-target=".navbar-collapse">
+					<i class="fa fa-phone fa-fw"></i>Contact</a>
+			</li>
+			<li>
+				<a href="mailto:michael.burton@golfchannel.com; Luke.Brown@GolfChannel.com; Amber.Hillner@golfchannel.com?Subject=MOP%20Feedback"
+				 target="_top">
+					<i class="fa fa-empire fa-fw"></i>FEEDBACK</a>
+			</li>
+			<li ng-controller="LogoutCtrl">
+				<a data-toggle={{meCollapse}} data-target=".navbar-collapse" ng-click="startLogout()">
+					<i class="fa fa-sign-out fa-fw"></i>Log Out</a>
+			</li>
+		</ul>
+	</div>
+</div>

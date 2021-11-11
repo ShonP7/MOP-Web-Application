@@ -1,0 +1,563 @@
+<div ng-init="getDashboard(); getMediaFormats(); getCaptions()">
+	<div class="row">
+		<div class="col-xs-12">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="row">
+				<div id="dupPanel" class="col-lg-12 col-md-8 unselectable">
+					<div class="panel panel-{{dupColor}}">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="col-xs-4 text-center" ng-click="setPanel('Duplications', 'Pending')">
+									<div class="huge">{{dubStats.pending}}</div>
+									<div>Pending</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Duplications', 'Approved')">
+									<div class="huge">{{dubStats.approved}}</div>
+									<div>Approved</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Duplications', 'Duplicating')">
+									<div class="huge">{{dubStats.processing}}</div>
+									<div>Duplicating</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-copy fa-1x"></i> Duplications</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="restPanel" class="col-lg-12 col-md-8 unselectable">
+					<div class="panel panel-{{restColor}}">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="col-xs-6 text-center" ng-click="setPanel('Restores', 'Pending')">
+									<div class="huge">{{restStats.pending}}</div>
+									<div>Pending</div>
+								</div>
+								<div class="col-xs-6 text-center " ng-click="setPanel('Restores', 'Restoring')">
+									<div class="huge">{{restStats.restoring}}</div>
+									<div>Restoring</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-refresh fa-1x"></i> Restores</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="ingPanel" class="col-lg-12 col-md-8 unselectable">
+					<div class="panel panel-{{ingColor}}">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="col-xs-4 text-center" ng-click="setPanel('Ingests', 'Pending')">
+									<div class="huge">{{ingStats.pending}}</div>
+									<div>Pending</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Ingests', 'Approved')">
+									<div class="huge">{{ingStats.approved}}</div>
+									<div>Approved</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Ingests', 'Processing')">
+									<div class="huge">{{ingStats.processing}}</div>
+									<div>Processing</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-shopping-cart fa-1x"></i> Ingests</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="arcPanel" class="col-lg-12 col-md-8 unselectable">
+					<div class="panel panel-{{arcColor}}">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="col-xs-3 text-center" ng-click="setPanel('Archives', 'Pending')">
+									<div class="huge">{{arcStats.pending}}</div>
+									<div>Pending</div>
+								</div>
+								<div class="col-xs-3 text-center" ng-click="setPanel('Archives', 'Mixdown')">
+									<div class="huge">{{arcStats.mixdown}}</div>
+									<div>Mixdown</div>
+								</div>
+								<div class="col-xs-3 text-center" ng-click="setPanel('Archives', 'Archiving')">
+									<div class="huge">{{arcStats.archiving}}</div>
+									<div>Archiving</div>
+								</div>
+								<div class="col-xs-3 text-center" ng-click="setPanel('Archives', 'Proxy')">
+									<div class="huge">{{arcStats.proxy}}</div>
+									<div>Proxy</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-archive fa-1x"></i> Archives</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="arcPanel" class="col-lg-12 col-md-8 unselectable">
+					<div class="panel panel-{{capColor}}">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="col-xs-4 text-center" ng-click="setPanel('Captions', 'Pending')">
+									<div class="huge">{{capStats.pending}}</div>
+									<div>Pending</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Captions', 'Processing')">
+									<div class="huge">{{capStats.processing}}</div>
+									<div>Processing</div>
+								</div>
+								<div class="col-xs-4 text-center" ng-click="setPanel('Captions', 'Complete')">
+									<div class="huge">{{capStats.complete}}</div>
+									<div>Complete</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-cc fa-1x"></i> Captions</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="arcPanel" class="col-lg-12 col-md-8 unselectable" ng-click="showTimeCard()">
+					<div class="panel panel-orange">
+						<div class="panel-heading panel-heading-custom">
+							<div class="row">
+								<div class="huge" style="text-align: center;">Active Jobs: {{timeCardCount}}</div>
+							</div>
+						</div>
+						<div>
+							<div class="panel-footer panel-footer-custom">
+								<span class="pull-left">
+									<h4>
+										<i class="fa fa-user fa-1x"></i> My Time Card</h4>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-9">
+			<div class="row">
+				<div class="panel panel-primary" ng-show="bigWindowToShow === 'jobsTable'">
+					<div class="panel-heading" id="temp">
+						<h4>{{subTSelectedype}} {{selected}}</h4>
+					</div>
+					<div class="panel-body">
+						<div class="dataTable_wrapper">
+							<table class="table table-unstriped table-borderedless table-hover" id="">
+								<thead id="scrollToData">
+									<tr>
+										<th></th>
+										<th ng-repeat="(i, j) in getTableHeadings()" ng-class="{hideMePlz: i >= 3}">{{j}}</th>
+										<th>AC</th>
+										<th>YC</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="(t, y) in getTableData()" class="odd gradeX" ng-style="{'background-color':y.bgColor}">
+										<td ng-show="y.noteStatus == 0" ng-click="showChat(y.id,-1)">
+											<i class="fa fa-comment-o" aria-hidden="true" style="color: lightslategrey; font-size: 1.5em; "></i>
+										</td>
+										<td ng-show="y.noteStatus == 1" ng-click="showChat(y.id, -1)">
+											<i class="fa fa-comment" aria-hidden="true" style="color: #8B9EE6; font-size: 1.5em"></i>
+										</td>
+										<td ng-show="y.noteStatus == 2" ng-click="showChat(y.id, -1)">
+											<i class="fa fa-comment" aria-hidden="true" style="color: #D4D64F; font-size: 1.5em;"></i>
+										</td>
+										<td ng-show="y.noteStatus == 3" ng-click="showChat(y.id, -1)">
+											<i class="fa fa-comment" aria-hidden="true" style="color: #B42846; font-size: 1.5em"></i>
+										</td>
+										<td ng-show="y.noteStatus == -1">
+											<!-- Dont show anything, this types does not have notes-->
+										</td>
+										<td ng-repeat="(a, b) in y" ng-hide="a == 'noteStatus' || a == 'timeNeededUnix' ||a == 'bgColor' || a == 'hasClockRunning' || a == 'anyClockRunning'"
+										  ng-click="setJobWindow(y.id)">{{b}}
+										</td>
+										<td ng-show="y.anyClockRunning == false">
+											<i class="fa fa-times text-gray time-icon" aria-hidden="true"></i>
+										</td>
+										<td ng-show="y.anyClockRunning == true">
+											<i class="fa fa-check time-icon" aria-hidden="true"></i>
+										</td>
+										<td ng-show="y.anyClockRunning == null">
+											
+										</td>
+										<td ng-show="y.hasClockRunning == false" ng-click="startMyTime(y.id)">
+											<i class="fa fa-play time-icon" aria-hidden="true"></i>
+										</td>
+										<td ng-show="y.hasClockRunning == true" ng-click="startMyTime(y.id)">
+											<i class="fa fa-stop text-red time-icon" aria-hidden="true"></i>
+										</td>
+										<td ng-show="y.hasClockRunning == null">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-orange" ng-show="bigWindowToShow === 'timeCard'">
+					<div class="panel-heading" id="temp">
+						<h4>My Active Jobs
+							<button type="button" class="btn btn-yellow" ng-click="stopAllMyJobs()">Stop All My Jobs</button>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="dataTable_wrapper" ng-show="timeCardCount !== 0">
+							<table class="table table-unstriped table-borderedless table-hover" id="">
+								<thead>
+									<tr>
+										<th>Job</th>
+										<th>Time Started</th>
+										<th>Duration</th>
+										<th>Stop My Time</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="i in myTimeCardLineItems" class="odd gradeX">
+										<td>{{i.jobDisplayId}}</td>
+										<td>{{i.timeStart}}</td>
+										<td>{{i.durationSeconds}}</td>
+										<td><button type="button" class="btn btn-sm btn-yellow" ng-click="stopJobClock(i.jobTypeId, i.jobId)">Stop My
+												Time</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<h4 ng-show="timeCardCount === 0">You Have No Job Clocks Running Currently.</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="scrollToJob">
+				<chat jobs="passToChat" active="windowToShow" ng-show="windowToShow === 'chat'"></chat>
+				<job-time-card jobs="passToJobTimeCard" active="windowToShow" ng-show="windowToShow === 'jobTimeCard'"></job-time-card>
+				<div class="panel panel-purple" ng-show="selected === 'Duplications' && windowToShow === 'job' && selectedJob !== null">
+					<div class="panel-heading">
+						<h4>Duplication Job Number: {{selectedJob.idDisplay}}
+							<button type="button" class="btn btn-yellow" ng-show="selectedJob.statusId === 1" ng-click="patchDashboard(selectedJob.id, 2)">Approve</button>
+							<button type="button" class="btn btn-orange" ng-show="selectedJob.statusId === 2" ng-click="patchDashboard(selectedJob.id, 4)">Start</button>
+							<button type="button" class="btn btn-red" ng-show="selectedJob.statusId === 4" ng-click="completeConfirm(selectedJob.id)">Complete</button>
+							<button type="button" class="btn btn-blue" ng-click="getPdf(selectedJob.id)"> PDF</button>
+							<button type="button" class="btn btn-green" ng-click="showChat(selectedJob.id, 2)"> Notes</button>
+							<button type="button" class="btn btn-orange" ng-click="showJobTimeCard(selectedJob.id)"> Time Card</button>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-4">
+								<b>Id:</b> {{selectedJob.idDisplay}}
+								<br>
+								<b>Status:</b> {{selectedJob.status}}
+								<br>
+								<b>Asset Name:</b> {{selectedJob.assetName}}
+								<br>
+								<b>Asset Code:</b> {{selectedJob.assetCode}}
+								<br>
+								<b>Client Name:</b> {{selectedJob.ownerNameFull}}
+								<br>
+								<b>Source Media Format:</b> {{selectedJob.sourceMediaFormatId}}
+								<br>
+								<b>Bug:</b> {{selectedJob.bug}}
+								<br>
+								<b>Label:</b> {{selectedJob.label}}
+								<br>
+								<b>Time Submitted:</b> {{selectedJob.timeSubmitted}}
+								<br>
+								<b>Time Needed:</b> {{selectedJob.timeNeeded}}
+								<br>
+								<b>User Supplied Stock:</b> {{selectedJob.userSuppliedStock}}
+								<br>
+							</div>
+							<div class="col-lg-4">
+								<b>Special Instructions:</b> {{selectedJob.instructions}}
+								<br>
+								<br>
+								<b>Reason For Use:</b> {{selectedJob.reasonForUse}}
+							</div>
+							<div class="col-lg-4">
+								<div class="dataTable_wrapper">
+									<table class="table table-unstriped table-borderedless table-hover" id="">
+										<thead>
+											<tr>
+												<th>Format</th>
+												<th>Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="(t, y) in selectedJob.destinationMedia" class="odd gradeX">
+												<td>{{t}}</td>
+												<td>{{y}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-purple" ng-show="selected === 'Restores' && windowToShow === 'job' && selectedJob !== null">
+					<div class="panel-heading">
+						<h4>Restore Job Number: {{selectedJob.idDisplay}}
+							<button type="button" class="btn btn-primary" style="background-color: green;" ng-click="showChat(selectedJob.id, 1)">
+								Notes</button>
+							<button type="button" class="btn btn-orange" ng-click="showJobTimeCard(selectedJob.id)">Time Card</button>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-3">
+								<b>Status:</b> {{selectedJob.status}}
+								<br>
+								<b>State:</b> {{selectedJob.statusText}}
+								<br>
+								<b>Owner Name:</b> {{selectedJob.ownerNameFull}}
+								<br>
+								<b>Progress Percent:</b> {{selectedJob.progressPercent}}
+								<br>
+								<b>Sequence Name:</b> {{selectedJob.sequenceName}}
+								<br>
+								<b>Time Submitted:</b> {{selectedJob.timeSubmitted}}
+								<br>
+								<b>Time Needed:</b> {{selectedJob.timeNeeded}}
+								<br>
+								<b>Time Expires:</b> {{selectedJob.timeExpires}}
+								<br>
+							</div>
+							<div class="col-lg-9">
+								<div class="dataTable_wrapper" ng-show="currentSubRestExist">
+									<table class="table table-unstriped table-borderedless table-hover" id="">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Status</th>
+												<th>State</th>
+												<th>%</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="(t, y) in holdSubRestData(selectedJob.id)" class="odd gradeX">
+												<td>{{t + 1}}</td>
+												<td>{{y[0]}}</td>
+												<td>{{y[1]}}</td>
+												<td>{{y[2]}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div ng-hide="currentSubRestExist">
+									<b>There are no subrestores</b>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-purple" ng-show="selected === 'Ingests' && windowToShow === 'job' && selectedJob !== null">
+					<div class="panel-heading">
+						<h4>Ingest Job Number: {{selectedJob.idDisplay}}
+							<button type="button" class="btn btn-yellow" ng-show="selectedJob.statusId === 1" ng-click="patchDashboard(selectedJob.id, 2)">Approve</button>
+							<button type="button" class="btn btn-orange" ng-show="selectedJob.statusId === 2" ng-click="patchDashboard(selectedJob.id, 4)">Start</button>
+							<button type="button" class="btn btn-red" ng-show="selectedJob.statusId === 4" ng-click="completeConfirm(selectedJob.id, 5)">Complete</button>
+							<button type="button" class="btn btn-blue" ng-click="getPdf(selectedJob.id)"> PDF</button>
+							<button type="button" class="btn btn-green" ng-click="showChat(selectedJob.id, 3)"> Notes</button>
+							<button type="button" class="btn btn-orange" ng-click="showJobTimeCard(selectedJob.id)">Time Card</button>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-4">
+								<b>Avid:</b> {{selectedJob.avidPath}}
+								<br>
+								<b>Status:</b> {{selectedJob.status}}
+								<br>
+								<b>Camera Info:</b> {{selectedJob.cameraModel}}
+								<br>
+								<b>Color Info:</b> {{selectedJob.colorSpace}}
+								<br>
+								<b>Owner:</b> {{selectedJob.ownerNameFull}}
+								<br>
+								<b>Request Need:</b> {{selectedJob.requestNeed}}
+								<br>
+								<b>Time Approved:</b> {{selectedJob.timeApproved}}
+								<br>
+								<b>Time Needed:</b> {{selectedJob.timeNeeded}}
+								<br>
+								<b>Time Submitted:</b> {{selectedJob.timeSubmitted}}
+								<br>
+								<br>
+								<b>Instructions:</b> {{selectedJob.instructions}}
+								<br>
+							</div>
+							<div class="col-lg-8">
+								<div class="dataTable_wrapper">
+									<table class="table table-unstriped table-borderedless table-hover" id="">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Clip Title</th>
+												<th>Media Type</th>
+												<th>Clip Number</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="(t, y) in selectedJob.lineItems" class="odd gradeX">
+												<td>{{t + 1}}</td>
+												<td>{{y[0]}}</td>
+												<td>{{y[1]}}</td>
+												<td>{{y[2]}}</td>
+												<td ng-show="y[3] === 1">
+													<button type="button" class="btn" ng-click="y[3] = changeSubIngestStatus(y[3], 4, y[4])">Start
+														<i class="fa fa-download" aria-hidden="true"></i>
+													</button>
+												</td>
+												<td ng-show="y[3] === 4">
+													<button type="button" class="btn" ng-click="y[3] = changeSubIngestStatus(y[3], 5, y[4])">Finish
+														<i class="fa fa-check" aria-hidden="true"></i>
+													</button>
+												</td>
+												<td ng-show="y[3] === 5">
+													<button type="button" class="btn">Completed
+														<i class="fa fa-check-circle" aria-hidden="true"></i>
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-purple" ng-show="selected === 'Archives' && windowToShow === 'job' && selectedJob !== null">
+					<div class="panel-heading">
+						<h4>Archive Job Number: {{selectedJob.idDisplay}}
+							<button type="button" class="btn btn-yellow" ng-show="selectedJob.statusId === 1" ng-click="patchDashboard(selectedJob.id, 9)">Approve</button>
+							<button type="button" class="btn btn-orange" ng-show="selectedJob.statusId === 9" ng-click="patchDashboard(selectedJob.id, 10)">Mixdown</button>
+							<button type="button" class="btn btn-orange" ng-show="selectedJob.statusId === 10" ng-click="patchDashboard(selectedJob.id, 11)">Archive</button>
+							<button type="button" class="btn btn-red" ng-show="selectedJob.statusId === 11" ng-click="completeConfirm(selectedJob.id, 5)">Complete</button>
+							<button type="button" class="btn btn-blue" ng-click="getPdf(selectedJob.id)"> PDF</button>
+							<button type="button" class="btn btn-green" ng-click="showChat(selectedJob.id, 4)"> Notes</button>
+							<button type="button" class="btn btn-orange" ng-click="showJobTimeCard(selectedJob.id)">Time Card</button>
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-4">
+								<b>Client Name:</b> {{selectedJob.ownerNameFull}}
+								<br>
+								<b>Status:</b> {{selectedJob.status}}
+								<br>
+								<b>Asset Name:</b> {{selectedJob.assetName}}
+								<br>
+								<b>Asset Code:</b> {{selectedJob.assetCode}}
+								<br>
+								<b>Time Submitted:</b> {{selectedJob.timeSubmitted}}
+								<br>
+								<b>Time Start Mixdown:</b> {{selectedJob.timeStartMixdown}}
+								<br>
+								<b>Time Start Archive:</b> {{selectedJob.timeStartArchive}}
+								<br>
+								<b>Time Start Proxy:</b> {{selectedJob.timeStartProxy}}
+								<br>
+							</div>
+							<div class="col-lg-4">
+								<b>Avid Path:</b> {{selectedJob.avidPath}}
+								<br>
+								<b>Instructions:</b> {{selectedJob.instructions}}
+								<br>
+							</div>
+							<div class="col-lg-4">
+								<div class="dataTable_wrapper">
+									<table class="table table-unstriped table-borderedless table-hover" id="">
+										<thead>
+											<tr>
+												<th>Specific Asset(s)</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="ass in selectedJob.specificAssets track by $index" class="odd gradeX">
+												<td>{{ass}}</td>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-purple" ng-show="selected === 'Captions' && windowToShow === 'job' && selectedJob !== null">
+					<div class="panel-heading">
+						<h4>Archive Job Number: {{selectedJob.idDisplay}}
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<b>File Name:</b> {{selectedJob.fileName}}
+								<br>
+								<b>Status:</b> {{selectedJob.status}}
+								<br>
+								<b>File Size Bytes:</b> {{selectedJob.fileSizeBytes}}
+								<br>
+								<b>File Size Seconds:</b> {{selectedJob.fileSizeSeconds}}
+								<br>
+								<b>Time Created:</b> {{selectedJob.timeCreated}}
+								<br>
+								<b>Status Id List:</b> {{selectedJob.statusIdListJson}}
+								<br>
+							</div>
+							<div class="col-lg-6">
+								<b>Log Items:</b> {{selectedJob.logItems}}
+								<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

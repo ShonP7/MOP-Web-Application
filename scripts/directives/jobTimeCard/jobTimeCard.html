@@ -1,0 +1,53 @@
+<div class="panel panel-orange">
+  <div class="panel-heading" id="temp">
+    <h4>{{jobs.jobType}} {{jobs.id}} Time Card
+      <button type="button" class="btn btn-green" ng-click="statMyClock()" ng-show="!currentlyClockedOn">Start My Clocks</button>
+      <button type="button" class="btn btn-yellow" ng-click="statMyClock()" ng-show="currentlyClockedOn">Stop My Clocks</button>
+      <button type="button" class="btn btn-red" ng-click="stopAllClocks()">Stop All Clocks</button>
+    </h4>
+  </div>
+  <div class="panel-body">
+    <h3>Current Clocks</h3>
+    <div class="dataTable_wrapper" ng-show="timeCard.hasRunningClocks">
+      <table class="table table-unstriped table-borderedless table-hover" id="">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Time Started</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="i in currentActiveClocks" class="odd gradeX">
+            <td>{{i.userNameFull}}</td>
+            <td>{{i.timeStart}}</td>
+            <td>{{i.durationSeconds}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h5 ng-show="!timeCard.hasRunningClocks">No one is working on this job</h5>
+    <h3>Past Clocks</h3>
+    <div class="dataTable_wrapper" ng-show="timeCard.hadRunningClocks">
+      <table class="table table-unstriped table-borderedless table-hover" id="">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Time Started</th>
+            <th>Time Ended</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in testClocks" class="odd gradeX">
+            <td>{{row.user}}</td>
+            <td>{{row.timeStart}}</td>
+            <td>{{row.timeEnd}}</td>
+            <td>{{row.durationSeconds}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h5 ng-show="!timeCard.hadRunningClocks">No one has worked on this job</h5>
+  </div>
+</div>

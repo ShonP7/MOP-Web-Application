@@ -1,0 +1,162 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Ingest Request</h1>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<form role="form" name="ingestRequestForm" novalidate>
+					<div class="row">
+						<legend style="color:#00A846">Basic Info</legend>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group" ng-class="{ 'has-error' : ingestRequestForm.ingestTitle.$invalid && !ingestRequestForm.ingestTitle.$pristine }">
+									<label>Ingest Title & Description: (Searchable in UX/MAM)*</label>
+									<input name="ingestTitle" ng-model="ingestTitle" class="form-control" placeholder="Media description and keyword"
+									 required>
+									<p ng-show="ingestRequestForm.ingestTitle.$invalid && !ingestRequestForm.ingestTitle.$pristine" class="help-block">Ingest
+										title required.</p>
+								</div>
+								<div class="form-group" ng-class="{ 'has-error' : ingestRequestForm.avidPath.$invalid && !ingestRequestForm.avidPath.$pristine }">
+									<label>Avid Interplay Path*</label>
+									<input name="avidPath" ng-model="avidPath" class="form-control" placeholder="Catalogs/Shows/Golf Central/2017 GC Features"
+									 required>
+									<p ng-show="ingestRequestForm.avidPath.$invalid && !ingestRequestForm.avidPath.$pristine" class="help-block">Avid/ISIS
+										path required.</p>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Date and Time Needed*</label>
+										<div ng-controller="DateCtrl" class="form-group" ng-class="{ 'has-error' : ingestRequestForm.date.$invalid && !ingestRequestForm.date.$pristine }">
+											<p class="input-group">
+												<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
+												 datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+												 id="date" name="date" ng-change="changed()" required readonly />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="open1()">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</p>
+											<p ng-show="ingestRequestForm.date.$invalid && !ingestRequestForm.date.$pristine" class="help-block">Date
+												and Time Needed Required.</p>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div ng-controller="TimeCtrl" ng-class="{ 'has-error' : assetTimeFlag }">
+											<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep"
+											 show-meridian="ismeridian" readonly-input="true"></div>
+											<p ng-show="assetTimeFlag" class="help-block">Enter a valid time</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Special Instructions</label>
+									<textarea class="form-control" ng-model="special" rows="7"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846">Additional Ingest & Naming Information</legend>
+						<div class="col-lg-6">
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th></th>
+											<th>List of of Ingest(s)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="company in companies">
+											<td>
+												<a ng-click="company.selected = true; remove()" ng-model="company.selected">
+													<i class="fa fa-remove fa-2x"></i>
+												</a>
+											</td>
+											<td>
+												<label>Media Type*</label>
+												<div class="form-group" ng-class="{ 'has-error' : flagType }">
+													<select class="form-control" ng-model="company.mediaType" style="width: 145px;">
+														<option value="" disabled selected>Choose one...</option>
+														<option value="1">XDCam</option>
+														<option value="1">Tape</option>
+														<option value="1">Hard Drive</option>
+														<option value="1">Memory Card</option>
+														<option value="1">HTTP or FTP</option>
+														<option value="1">DVD</option>
+														<option value="1">Other</option>
+													</select>
+													<p ng-show="flagType" class="help-block">Media Type Required.</p>
+												</div>
+												<label>Asset Name*</label>
+												<div class="form-group" ng-class="{ 'has-error' : flagName }">
+													<input type="text" class="form-control" ng-model="company.assetName" placeholder="Asset Name" style="width: 200px;"
+													 required />
+													<p ng-show="flagName" class="help-block">Asset Name Required.</p>
+												</div>
+												<label>Clip Number</label>
+												<div class="form-group" ng-class="{ 'has-error' : flagNum }">
+													<input type="number" min="1" step="1" class="form-control" ng-model="company.clipNum" style="width: 100px;" />
+													<p ng-show="flagNum" class="help-block">Clip Number Must be Integer.</p>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="form-group">
+									<input type="button" ng-click="addNew()" class="btn btn-primary addnew pull-right" value="Add Another" style="text-align:center;">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Camera Information</label>
+								<select class="form-control" ng-model="camType">
+									<option value="" disabled selected>Choose one...</option>
+									<option>Arri Alexa</option>
+									<option>F 55</option>
+									<option>RED</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Color Space Information</label>
+								<select class="form-control" ng-model="lutType">
+									<option value="" disabled selected>Choose one...</option>
+									<option>Rec 709</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846">Financial Reporting</legend>
+						<div class="col-lg-6">
+							<div class="form-group" ng-class="{ 'has-error' : ingestRequestForm.reason4Ingest.$invalid && !ingestRequestForm.reason4Ingest.$pristine }">
+								<label>Business Purpose*</label>
+								<textarea name="reason4Ingest" ng-model="reason4Ingest" class="form-control" rows="3" placeholder="Ex: For boss, approvals, personal review, client request, proof of sponsorship, client archive, 3rd party, broadcast"
+								 required></textarea>
+								<p ng-show="ingestRequestForm.reason4Ingest.$invalid && !ingestRequestForm.reason4Ingest.$pristine" class="help-block">Reason
+									for ingest required.</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846"></legend>
+						<div class="col-md-12">
+							<div style="text-align:center;">
+								<button type="submit" class="btn btn-primary" ng-click="submitForm()">Submit Request</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+</div>

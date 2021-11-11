@@ -1,0 +1,99 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Captioning Request</h1>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<form name="createDubRequest" novalidate>
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine }">
+									<label>Program Name*</label>
+									<input name="assetName" class="form-control" type="text" ng-model="assetName" placeholder="Ex: The Golf Fix: Fixing your Putting"
+									 required>
+									<p ng-show="createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine" class="help-block">Asset/Show
+										Name Required.</p>
+								</div>
+								<div class="form-group">
+									<label>Asset File Name</label>
+									<input name="programID" class="form-control" type="text" placeholder="Ex: TGF14001" ng-model="programID">
+                </div>
+								<div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group" ng-class="{ 'has-error' : createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine }">
+                            <label>Runtime*</label>
+         	                   <input name="assetName" class="form-control" type="time" ng-model="assetName" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                             required>
+                            <p ng-show="createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine" class="help-block">Asset/Show
+                              Name Required.</p>
+                          </div>
+                      </div>
+									<div class="col-sm-4">
+										<label>Delivery to Vitac*</label>
+										<div ng-controller="DateCtrl" class="form-group" ng-class="{ 'has-error' : createDubRequest.date.$invalid && !createDubRequest.date.$pristine }">
+											<p class="input-group">
+												<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
+												 datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+												 id="date" name="date" ng-change="changed()" readonly required />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="open1()">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</p>
+											<p ng-show="createDubRequest.date.$invalid && !createDubRequest.date.$pristine" class="help-block">Date and
+												Time Needed Required.</p>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<label>Delivery to GC for Air *</label>
+										<div ng-controller="DateCtrl" class="form-group" ng-class="{ 'has-error' : createDubRequest.date.$invalid && !createDubRequest.date.$pristine }">
+											<p class="input-group">
+												<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
+												 datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+												 id="date" name="date" ng-change="changed()" readonly required />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="open1()">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</p>
+											<p ng-show="createDubRequest.date.$invalid && !createDubRequest.date.$pristine" class="help-block">Date and
+												Time Needed Required.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.lableRequests.$invalid && !createDubRequest.lableRequests.$pristine }">
+									<label>Caption Location*</label>
+									<textarea name="lableRequests" class="form-control" ng-model="lableRequests" rows="3"></textarea>
+									<p ng-show="createDubRequest.lableRequests.$invalid && !createDubRequest.lableRequests.$pristine" class="help-block">Label
+										requests required.</p>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : createDubRequest.specialInstructions.$invalid && !createDubRequest.specialInstructions.$pristine }">
+									<label>Special Instructions</label>
+									<textarea name="specialInstructions" class="form-control" placeholder="Ex: Digital media link or information you would otherwise send via email to MO regarding this request"
+									 ng-model="specialInstructions" rows="3"></textarea>
+									<p ng-show="createDubRequest.specialInstructions.$invalid && !createDubRequest.specialInstructions.$pristine"
+									 class="help-block">Special instructions required.</p>
+								</div>
+							</div>
+						</div>
+						<legend style="color:#00A846"></legend>
+						<div class="col-md-12">
+							<div style="text-align:center;">
+								<button type="submit" class="btn btn-primary" ng-click="submitForm()">Submit Request</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-1"></div>
+			</form>
+		</div>
+	</div>
+</div>

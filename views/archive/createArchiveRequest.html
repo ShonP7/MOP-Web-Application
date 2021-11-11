@@ -1,0 +1,110 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Archive Request</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<form role="form" name="archiveRequestForm" ng-submit="submitForm()" novalidate>
+				<div class="row">
+					<legend style="color:#00A846">Basic Info</legend>
+					<div class="col-lg-6">
+						<div class="form-group"
+								 ng-class="{ 'has-error' : archiveRequestForm.programTitle.$invalid && !archiveRequestForm.programTitle.$pristine }">
+							<label>Program Title*</label>
+							<input name="programTitle" class="form-control" type="text" placeholder="Ex: TGF14001"
+										 ng-model="programTitle" required>
+							<p ng-show="archiveRequestForm.programTitle.$invalid && !archiveRequestForm.programTitle.$pristine"
+								 class="help-block">Program Title Required.</p>
+						</div>
+						<div class="form-group">
+							<label> Program ID</label>
+							<input name="programId" type="text" class="form-control" placeholder="Ex: 231231" ng-model="programId">
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Additional Notes</label>
+							<textarea class="form-control" rows="5" ng-model="additionalNotes"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<legend style="color:#00A846">Avid Location</legend>
+					<label>Current Path: {{currentISIS}}{{programPath}}</label>
+					<div class="form-group">
+					</div>
+					<div class="form-group"
+							 ng-class="{ 'has-error' : archiveRequestForm.programPath.$invalid && !archiveRequestForm.programPath.$pristine }">
+						<label>FULL Interplay Path*</label>
+						<input name="programPath" class="form-control" type="text" placeholder="Please Choose a ISIS System First"
+									 ng-model="programPath" required>
+						<p ng-show="archiveRequestForm.programPath.$invalid && !archiveRequestForm.programPath.$pristine"
+							 class="help-block">Program Path Required.</p>
+					</div>
+				</div>
+				<div class="row">
+					<legend style="color:#00A846">Specific Asset(s)</legend>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Check To Archive ALL Assets in Folder: </label>
+
+							<input style="transform: scale(1.2);" type="checkbox" ng-model="allAssetsFlag" value="true"
+										 ng-click="clearAssets()">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="table-responsive" ng-hide="allAssetsFlag == true">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th></th>
+									<th>Asset*</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat=" asset in specificAsset">
+									<td>
+										<div style="text-align:center;">
+											<a ng-click="asset.selected = true; remove()" ng-model="asset.selected"><i
+													class="fa fa-remove fa-2x"></i></a>
+										</div>
+									</td>
+									<td>
+										<div class="form-group"
+												 ng-class="{ 'has-error' : (archiveRequestForm.specificAsset.$invalid && !archiveRequestForm.specificAsset.$pristine) || specificAssetFlag }">
+											<input name="asset" type="text" id="specificAsset" min="1" step="1"
+														 class="form-control"
+														 ng-model="asset.asset"
+														 style="width: 280px;" required/>
+											<p ng-show="(archiveRequestForm.specificAsset.$invalid && !archiveRequestForm.specificAsset.$pristine) || specificAssetFlag"
+												 class="help-block">Asset Name Required.</p>
+										</div>
+
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<input type="button" ng-click="addNew()" class="btn btn-primary add new pull-right"
+											 value="Add Asset">
+							</div>
+						</div>
+						<div ng-hide="!(allAssetsFlag == true)">
+							ALL Assets in Folder Will Be Archived
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<legend style="color:#00A846"></legend>
+					<div style="text-align:center;">
+						<button type="submit" class="btn btn-primary">Submit Request</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>

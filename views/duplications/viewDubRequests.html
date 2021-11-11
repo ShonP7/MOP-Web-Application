@@ -1,0 +1,95 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Duplication Requests</h1>
+	</div>
+</div>
+<div class="row" ng-hide="gotDataYet">
+	Sorry, this might take a bit. There are a lot of records!
+</div>
+<div class="row" ng-show="gotDataYet">
+	<div class="col-lg-6">
+		<div class="table-responsive" ng-hide="nothingToShow">
+			<table ng-table="tableParams" class="table table-striped table-borderedless table-hover" show-filter="true">
+				<tr ng-repeat="row in $data" ng-click="setJobWindow(row.id)">
+					<td data-title="'Duplication ID'" filter="{ id: 'number'}" sortable="'id'">{{ row.id }}</td>
+					<td data-title="'Owner'" filter="{ owner: 'text'}" sortable="'owner'">{{ row.owner }}</td>
+					<td data-title="'Title'" filter="{ title: 'text'}" sortable="'title'">{{ row.title }}</td>
+					<td data-title="'Time Needed'" filter="{ time: 'text'}">{{ row.time }}</td>
+				</tr>
+			</table>
+		</div>
+		<div ng-show="nothingToShow">There are currently no restores associated with this account.</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="jumbotron" ng-show="windowToShow == 'nothing'">
+			<p>
+				<b>Select a job to see more about it.</b>
+			</p>
+		</div>
+		<div class="panel panel-purple" ng-show="windowToShow == 'panel'" id="scrollToData">
+			<div class="panel-heading">
+				<h4>Duplication Job Number: {{selectedJob.id}}
+					<button type="button" class="btn btn-blue" ng-click="getPdf(selectedJob.id)"> PDF</button>
+					<button type="button" class="btn btn-green" ng-click="showChat(selectedJob.id, 2)" ng-show="userIsAdmin">Notes</button>
+					<button type="button" class="btn btn-orange" ng-click="showJobTimeCard(selectedJob.id)" ng-show="userIsAdmin"> Time Card</button>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<b>Id:</b> {{selectedJob.id}}
+						<br>
+						<b>Status:</b> {{selectedJob.status}}
+						<br>
+						<b>Asset Name:</b> {{selectedJob.assetName}}
+						<br>
+						<b>Asset Code:</b> {{selectedJob.assetCode}}
+						<br>
+						<b>Client Name:</b> {{selectedJob.ownerNameFull}}
+						<br>
+						<b>Source Media Format:</b> {{selectedJob.sourceMediaFormatId}}
+						<br>
+						<b>Bug:</b> {{selectedJob.watermark}}
+						<br>
+						<b>Label:</b> {{selectedJob.label}}
+						<br>
+						<b>User Supplied Stock:</b> {{selectedJob.userSuppliedStock}}
+						<br>
+						<br>
+					</div>
+					<div class="col-lg-6">
+						<b>Time Submitted:</b> {{selectedJob.timeSubmitted}}
+						<br>
+						<b>Time Needed:</b> {{selectedJob.timeNeeded}}
+						<br>
+						<br>
+						<b>Reason For Use:</b> {{selectedJob.requestNeed}}
+						<br>
+						<br>
+						<b>Special Instructions:</b> {{selectedJob.instructions}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="dataTable_wrapper">
+						<table class="table table-unstriped table-borderedless table-hover" id="">
+							<thead>
+								<tr>
+									<th>Format</th>
+									<th>Count</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(t, y) in selectedJob.destinationMedia" class="odd gradeX">
+									<td>{{t}}</td>
+									<td>{{y}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<chat jobs="passToChat" active="windowToShow" ng-show="windowToShow == 'chat'"></chat>
+		<job-time-card jobs="passToJobTimeCard" active="windowToShow" ng-show="windowToShow === 'jobTimeCard'"></job-time-card>
+	</div>
+</div>

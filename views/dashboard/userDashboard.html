@@ -1,0 +1,121 @@
+<div ng-init="getDashboard()">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 class="page-header">Dashboard</h1>
+		</div>
+	</div>
+	<div class="row" ng-show="showDuplications">
+		<div class="col-xs-12">
+			<div class="panel panel-yellow">
+				<div class="panel-heading"><h4>Duplications</h4></div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Job Number</th>
+							<th>Time Submitted</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="dub in duplications" ng-click="getPdf(dub.id, 'duplication')">
+							<td>{{dub.displayId}}</td>
+							<td>{{dub.timeSubmitted}}</td>
+							<td>{{dub.status}}</td>
+							<td><a href="https://s3.amazonaws.com/mopassets/Golf+Channel+Editorial+Stylebook.pdf" target="_blank" rel="noopener noreferrer">
+								<img class="pdf-icon" src="./images/pdficon.png" alt="pdf"></a></td>
+						</tr>
+						<tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="showRestores">
+		<div class="col-xs-12">
+			<div class="panel panel-red">
+				<div class="panel-heading"><h4>Restores</h4></div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>Job Number</th>
+							<th>Time Submitted</th>
+							<th>Status</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="rest in restores">
+								<td>{{rest.displayId}}</td>
+								<td>{{rest.timeSubmitted}}</td>
+								<td>{{rest.status}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="showIngests">
+		<div class="col-xs-12">
+			<div class="panel panel-orange">
+				<div class="panel-heading"><h4>Ingests</h4></div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Job Number</th>
+							<th>Time Submitted</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="ing in ingests" ng-click="getPdf(ing.id, 'ingest')">
+								<td>{{ing.displayId}}</td>
+								<td>{{ing.timeSubmitted}}</td>
+								<td>{{ing.status}}</td>
+								<td><a href="https://s3.amazonaws.com/mopassets/Golf+Channel+Editorial+Stylebook.pdf" target="_blank" rel="noopener noreferrer">
+									<img class="pdf-icon" src="./images/pdficon.png" alt="pdf"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="showArchives">
+		<div class="col-xs-12">
+			<div class="panel panel-purple">
+				<div class="panel-heading"><h4>Archives</h4></div>
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Job Number</th>
+							<th>Time Submitted</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="arc in archives" ng-click="getPdf(arc.id, 'archive')">
+								<td>{{arc.displayId}}</td>
+								<td>{{arc.timeSubmitted}}</td>
+								<td>{{arc.status}}</td>
+								<td><a href="https://s3.amazonaws.com/mopassets/Golf+Channel+Editorial+Stylebook.pdf" target="_blank" rel="noopener noreferrer">
+									<img class="pdf-icon" src="./images/pdficon.png" alt="pdf"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="showNothing">
+		There is currently no information to show.
+	</div>
+</div>

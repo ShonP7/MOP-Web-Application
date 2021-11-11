@@ -1,0 +1,50 @@
+<div class="chat-panel panel panel-green">
+    <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i>
+        {{jobs.jobType}} {{jobs.jobId}} Notes/Chat
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu slidedown">
+                <li>
+                    <a ng-click="getChat()">
+                        <i class="fa fa-refresh fa-fw"></i> Refresh
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body" style="max-height: 500px; min-height: 500px; overflow-y: scroll;">
+        <div class="row chat clearfix" ng-repeat="note in notes">
+            <div class="col-md-12 col-xs-12">
+                <div class="container-fluid">
+                    <div>
+                        <strong class="primary-font pull-{{note.pullMe}}">{{note.ownerNameFull}}</strong>
+                        <small class="text-muted pull-{{note.pullMe}} chat-time">
+                            {{note.timeCreated}}
+                        </small>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="pull-{{note.pullMe}}">
+                        <p style="overflow: hidden; padding: 4px; background-color: {{note.color}}; border-radius: 15px; border-color: {{note.background}}; border-style: solid;">
+                            <strong ng-show="note.adminOnly">For Admin Only:</strong>
+                            <strong ng-show="!(note.adminOnly)">All:</strong>
+                            {{note.message}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom"></div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-sm" style="color: white; background-color: {{statusColor}}" ng-click="changeStatus()"> {{statusText}}</button>
+        &nbsp;
+        <button class="btn btn-sm" style="color: white; background-color: {{visabilityColor}}" ng-click="whoView()"> {{visabiltyText}}</button>
+        <button class="btn btn-success btn-sm; pull-right" id="send" ng-click="postChat()"> Send </button>
+        <textarea keyup="autoExpand($event)" ng-model="message" data-ng-keypress="onMessageKeyPress($event)" id="messageText" type="text"
+            class="form-control" style="height:auto; min-height: 50px;" placeholder="Type your message here..."></textarea>
+    </div>
+</div>

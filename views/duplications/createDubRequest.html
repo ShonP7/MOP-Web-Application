@@ -1,0 +1,187 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Duplication Request</h1>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<form name="createDubRequest" novalidate>
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="row">
+						<legend style="color:#00A846">Basic Info</legend>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine }">
+									<label>Asset/Show Name*</label>
+									<input name="assetName" class="form-control" type="text" ng-model="assetName" placeholder="Ex: The Golf Fix: Fixing your Putting"
+									 required>
+									<p ng-show="createDubRequest.assetName.$invalid && !createDubRequest.assetName.$pristine" class="help-block">Asset/Show
+										Name Required.</p>
+								</div>
+								<div class="form-group">
+									<label>Program ID</label>
+									<input name="programID" class="form-control" type="text" placeholder="Ex: TGF14001" ng-model="programID">
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<label>Date and Time Needed*</label>
+										<div ng-controller="DateCtrl" class="form-group" ng-class="{ 'has-error' : createDubRequest.date.$invalid && !createDubRequest.date.$pristine }">
+											<p class="input-group">
+												<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened"
+												 datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+												 id="date" name="date" ng-change="changed()" readonly required />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="open1()">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</p>
+											<p ng-show="createDubRequest.date.$invalid && !createDubRequest.date.$pristine" class="help-block">Date and
+												Time Needed Required.</p>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div ng-controller="TimeCtrl" class="form-group" ng-class="{ 'has-error' : assetTimeFlag }">
+											<div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep"
+											 show-meridian="ismeridian" readonly-input="true">
+											</div>
+											<p ng-show="assetTimeFlag" class="help-block">Enter a valid time</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.specialInstructions.$invalid && !createDubRequest.specialInstructions.$pristine }">
+									<label>Special Instructions</label>
+									<textarea name="specialInstructions" class="form-control" placeholder="Ex: Digital media link or information you would otherwise send via email to MO regarding this request"
+									 ng-model="specialInstructions" rows="3"></textarea>
+									<p ng-show="createDubRequest.specialInstructions.$invalid && !createDubRequest.specialInstructions.$pristine"
+									 class="help-block">Special instructions required.</p>
+								</div>
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.lableRequests.$invalid && !createDubRequest.lableRequests.$pristine }">
+									<label>Label Requests</label>
+									<textarea name="lableRequests" class="form-control" ng-model="lableRequests" rows="3"></textarea>
+									<p ng-show="createDubRequest.lableRequests.$invalid && !createDubRequest.lableRequests.$pristine" class="help-block">Label
+										requests required.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846">Content Protection</legend>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>No Logo/Bug Burn-in:</label>
+									<label class="checkbox-inline">
+										<input name="noBug" ng-model="noBug" type="checkbox">
+									</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : noBugWhyFlag == true }">
+									<label>Reason for No Logo (If Checked)</label>
+									<textarea name="noBugWhy" ng-model="noBugWhy" class="form-control" rows="3"></textarea>
+									<p ng-show="noBug" class="help-block">Reason for no logo required if no logo selected.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846">Request List</legend>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.assetSource.$invalid && !createDubRequest.assetSource.$pristine }">
+									<label>Asset Source*</label>
+									<select name="assetSource" class="form-control" ng-model="assetSourceMFID" ng-options="obj.mf_format_name for obj in listOfAssetSources track by obj.mf_id"
+									 required>
+										<option value="" disabled selected>Choose one...</option>
+									</select>
+									<p ng-show="createDubRequest.assetSource.$invalid && !createDubRequest.assetSource.$pristine" class="help-block">Asset
+										Source Required.</p>
+								</div>
+								<div class="form-group">
+									<label>User Supply Stock:</label>
+									<label class="checkbox-inline">
+										<input name="userSuppliedStock" ng-model="userSuppliedStock" type="checkbox">
+									</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Asset Destination*</th>
+												<th>Quantity*</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat=" asset in assetDestination">
+												<td>
+													<div style="text-align:center;">
+														<a ng-click="asset.selected = true; remove()" ng-model="asset.selected">
+															<i class="fa fa-remove fa-2x"></i>
+														</a>
+													</div>
+												</td>
+												<td>
+													<div class="form-group" ng-class="{ 'has-error' : createDubRequest.assetDestination.$invalid && !createDubRequest.assetDestination.$pristine }">
+														<select name="assetDestination" class="form-control" ng-model="asset.assetDestination" ng-options="obj.mf_format_name for obj in listOfAssetSources track by obj.mf_id"
+														 required>
+															<option value="" disabled selected>Choose one...</option>
+														</select>
+														<p ng-show="createDubRequest.assetDestination.$invalid && !createDubRequest.assetDestination.$pristine"
+														 class="help-block">Asset Destination Required.</p>
+													</div>
+												</td>
+												<td>
+													<div class="form-group" ng-class="{ 'has-error' : (createDubRequest.quantity.$invalid && !createDubRequest.quantity.$pristine) || assetQuantityFlag }">
+														<input name="assetQuantity" type="number" id="assetQuantity" min="1" step="1" class="form-control"
+														 ng-model="asset.quantity" style="width: 80px;" required />
+														<p ng-show="(createDubRequest.quantity.$invalid && !createDubRequest.quantity.$pristine) || assetQuantityFlag"
+														 class="help-block">Quantity Required.</p>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="form-group">
+										<input type="button" ng-click="addNew()" class="btn btn-primary add new pull-right" value="Add Another">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846">Financial Reporting</legend>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" ng-class="{ 'has-error' : createDubRequest.needForDub.$invalid && !createDubRequest.needForDub.$pristine }">
+									<label>Business Purpose*</label>
+									<textarea name="needForDub" ng-model="needForDub" class="form-control" rows="3" placeholder="Ex: For boss, approvals, personal review, client request, proof of sponsorship, client archive, 3rd party, broadcast"
+									 required>
+								</textarea>
+									<p ng-show="createDubRequest.needForDub.$invalid && !createDubRequest.needForDub.$pristine" class="help-block">Business
+										Purpose Required.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<legend style="color:#00A846"></legend>
+						<div class="col-md-12">
+							<div style="text-align:center;">
+								<button type="submit" class="btn btn-primary" ng-click="submitForm()">Submit Request</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Manage Users</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="dataTable_wrapper">
+      <table class="table table-unstriped table-borderedless table-hover" id="dataTables-example">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>User Name</th>
+            <th>Last Login</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="odd gradeX" ng-repeat="user in users | orderBy:'-userId'" ng-click="setSelectedUser(user, $index)">
+            <td class="center">{{user.userId}}</td>
+            <td class="center">{{user.firstName}} {{user.lastName}}</td>
+            <td class="center">{{user.userName}}</td>
+            <td class="center">{{user.lastLogin}}</td>
+            <td class="center">{{user.accountStatusDisplay}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <form role="form" name="userEdit" novalidate>
+      <div class="row" id="editPlace">
+        <h1>Selected User</h1>
+        <div class="col-lg-6">
+          <div class="form-group" ng-class="{ 'has-error' : userEdit.firstName.$invalid && !userEdit.firstName.$pristine }">
+            <label>First Name:</label>
+            <input name="firstName" ng-model="selected.firstName" class="form-control" required>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : userEdit.lastName.$invalid && !userEdit.lastName.$pristine }">
+            <label>Last Name:</label>
+            <input name="lastName" ng-model="selected.lastName" class="form-control" required>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : userEdit.email.$invalid && !userEdit.email.$pristine }">
+            <label>Email:</label>
+            <input name="email" ng-model="selected.email" type="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Phone:</label>
+            <input ng-model="selected.phone" type="tel" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Mobile:</label>
+            <input ng-model="selected.mobile" type="tel" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Access Needed:</label>
+            <input ng-model="selected.accessNeed" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Department:</label>
+            <select id="depId" class="form-control">
+              <option ng-value="selected.departmentId" disabled selected>{{selected.depDisplay}}</option>
+              <option ng-repeat="dep in listOfDeparments" value="{{$index}}">{{dep}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Archive Access:</label>
+            <select id="arcAc" class="form-control">
+              <option ng-value="selected.permissions.archives" disabled selected>{{selected.archivesDisplay}}</option>
+              <option ng-value="1">No Access</option>
+              <option ng-value="2">Read Only</option>
+              <option ng-value="3">Read and Submit</option>
+              <option ng-value="4">Read, Submit and Edit</option>
+              <option ng-value="5">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Duplications Access:</label>
+            <select id="dupAc" class="form-control">
+              <option ng-value="selected.permissions.duplications" disabled selected>{{selected.duplicationsDisplay}}</option>
+              <option ng-value="1">No Access</option>
+              <option ng-value="2">Read Only</option>
+              <option ng-value="3">Read and Submit</option>
+              <option ng-value="4">Read, Submit and Edit</option>
+              <option ng-value="5">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Fore Access:</label>
+            <select id="forAc" class="form-control">
+              <option ng-value="selected.permissions.fore" disabled selected>{{selected.foreDisplay}}</option>
+              <option ng-value="1">No Access</option>
+              <option ng-value="2">Read Only</option>
+              <option ng-value="3">Read and Submit</option>
+              <option ng-value="4">Read, Submit and Edit</option>
+              <option ng-value="5">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ingests Access:</label>
+            <select id="ingAc" class="form-control">
+              <option ng-value="selected.permissions.ingests" disabled selected>{{selected.ingestsDisplay}}</option>
+              <option ng-value="1">No Access</option>
+              <option ng-value="2">Read Only</option>
+              <option ng-value="3">Read and Submit</option>
+              <option ng-value="4">Read, Submit and Edit</option>
+              <option ng-value="5">Administrator</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Restores Access:</label>
+            <select id="resAc" class="form-control">
+              <option ng-value="selected.permissions.restores" disabled selected>{{selected.restoresDisplay}}</option>
+              <option ng-value="1">No Access</option>
+              <option ng-value="2">Read Only</option>
+              <option ng-value="3">Read and Submit</option>
+              <option ng-value="4">Read, Submit and Edit</option>
+              <option ng-value="5">Administrator</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button type="submit" ng-show="showSelected" class="btn btn-primary" ng-click="checkForm(selected.userId)">Update Account</button>
+      <button type="submit" ng-show="selected.accountStatus == 0" class="btn btn-warning" ng-click="activateAccount(selected.userId)">Activate Account</button>
+      <button type="submit" ng-show="selected.accountStatus == 1" class="btn btn-danger" ng-click="deactivateAccount(selected.userId)">Deactivate Account</button>
+    </form>
+  </div>
+</div>
+</div>
